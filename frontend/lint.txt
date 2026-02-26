@@ -1,0 +1,54 @@
+[0m[0m
+[0m[4mD:\Antigravity\Assignment Project\frontend\src\context\AuthContext.jsx[24m[0m
+[0m   [2m5:14[22m  [31merror[39m    Fast refresh only works when a file only exports components. Move your React context(s) to a separate file    [2mreact-refresh/only-export-components[22m[0m
+[0m  [2m21:22[22m  [31merror[39m    'e' is defined but never used                                                                                 [2mno-unused-vars[22m[0m
+[0m  [2m27:8[22m   [33mwarning[39m  React Hook useEffect has a missing dependency: 'fetchUser'. Either include it or remove the dependency array  [2mreact-hooks/exhaustive-deps[22m[0m
+[0m  [2m33:18[22m  [31merror[39m    'e' is defined but never used                                                                                 [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mD:\Antigravity\Assignment Project\frontend\src\pages\CourseView.jsx[24m[0m
+[0m  [2m10:23[22m  [31merror[39m    'showInfo' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                      [2mno-unused-vars[22m[0m
+[0m  [2m41:8[22m   [33mwarning[39m  React Hook useEffect has missing dependencies: 'fetchCourseDetails' and 'fetchStudentsProgress'. Either include them or remove the dependency array  [2mreact-hooks/exhaustive-deps[22m[0m
+[0m[0m
+[0m[4mD:\Antigravity\Assignment Project\frontend\src\pages\Home.jsx[24m[0m
+[0m  [2m5:10[22m  [31merror[39m  'showError' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mD:\Antigravity\Assignment Project\frontend\src\pages\Login.jsx[24m[0m
+[0m  [2m19:18[22m  [31merror[39m  'err' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mD:\Antigravity\Assignment Project\frontend\src\pages\StudentDashboard.jsx[24m[0m
+[0m  [2m11:9[22m  [31merror[39m  Error: Cannot access variable before it is declared[0m
+[0m[0m
+[0m`fetchCourses` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.[0m
+[0m[0m
+[0m   9 |[0m
+[0m  10 |     useEffect(() => {[0m
+[0m> 11 |         fetchCourses();[0m
+[0m     |         ^^^^^^^^^^^^ `fetchCourses` accessed before it is declared[0m
+[0m  12 |     }, []);[0m
+[0m  13 |[0m
+[0m  14 |     const fetchCourses = async () => {[0m
+[0m[0m
+[0m  12 |     }, []);[0m
+[0m  13 |[0m
+[0m> 14 |     const fetchCourses = async () => {[0m
+[0m     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 15 |         try {[0m
+[0m     | ^^^^^^^^^^^^^[0m
+[0m> 16 |             const res = await getCourses();[0m
+[0m     | ^^^^^^^^^^^^^[0m
+[0m> 17 |             setCourses(res);[0m
+[0m     | ^^^^^^^^^^^^^[0m
+[0m> 18 |         } catch (e) {[0m
+[0m     | ^^^^^^^^^^^^^[0m
+[0m> 19 |             console.error(e);[0m
+[0m     | ^^^^^^^^^^^^^[0m
+[0m> 20 |         }[0m
+[0m     | ^^^^^^^^^^^^^[0m
+[0m> 21 |     };[0m
+[0m     | ^^^^^^^ `fetchCourses` is declared here[0m
+[0m  22 |[0m
+[0m  23 |     const handleEnroll = async (courseId) => {[0m
+[0m  24 |         try {  [2mreact-hooks/immutability[22m[0m
+[0m[0m
+[0m[31m[1m✖ 9 problems (7 errors, 2 warnings)[22m[39m[0m
+[0m[31m[1m[22m[39m[0m
