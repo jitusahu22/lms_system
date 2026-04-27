@@ -140,7 +140,7 @@ class LessonViewSet(viewsets.ModelViewSet):
             
         result = generate_practice_questions(lesson.content)
         if "error" in result:
-            return Response(result, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"detail": result["error"]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(result, status=status.HTTP_200_OK)
         
     @action(detail=True, methods=['get', 'post'], permission_classes=[permissions.IsAuthenticated])

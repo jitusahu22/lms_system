@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         const res = await registerUser({ username, email, password, role });
         localStorage.setItem('access', res.data.access);
         localStorage.setItem('refresh', res.data.refresh);
-        setUser(res.data.user);
+        await fetchUser();
     };
 
     const logout = () => {

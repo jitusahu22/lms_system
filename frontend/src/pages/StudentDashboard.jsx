@@ -61,7 +61,7 @@ const StudentDashboard = () => {
                             </div>
                         </div>
                         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1rem' }}>Instructor: {course.instructor_name}</p>
-                        <p style={{ color: 'var(--text-main)', flex: 1, marginBottom: '1.5rem' }}>{course.description.substring(0, 100)}...</p>
+                        <p style={{ color: 'var(--text-main)', flex: 1, marginBottom: '1.5rem' }}>{course.description ? course.description.substring(0, 100) : ''}...</p>
 
                         {course.is_enrolled ? (
                             <div style={{ background: 'var(--background)', padding: '1rem', borderRadius: '0.5rem', marginTop: 'auto' }}>

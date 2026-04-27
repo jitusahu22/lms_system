@@ -4,7 +4,7 @@ import { showError } from '../utils/notify';
 const handleError = (e) => {
     const errorMsg = e.response?.data?.detail || e.response?.data?.message || e.message || 'An unexpected error occurred';
     showError(errorMsg);
-    throw e;
+    return Promise.reject(e);
 };
 
 // Auth Services
@@ -15,12 +15,12 @@ export const getMe = async () => {
 
 export const loginUser = async (credentials) => {
     const response = await api.post('auth/login/', credentials).catch(handleError);
-    return response ? response : {};
+    return response;
 };
 
 export const registerUser = async (userData) => {
     const response = await api.post('auth/register/', userData).catch(handleError);
-    return response ? response : {};
+    return response;
 };
 
 // Course Services

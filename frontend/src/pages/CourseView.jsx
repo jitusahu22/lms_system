@@ -52,14 +52,16 @@ const CourseView = () => {
         try {
             const res = await getCourseById(courseId);
             setCourse(res);
-            if (res.lessons.length > 0 && !activeLesson) {
+            // Default to first lesson if not set
+            if (res.lessons && res.lessons.length > 0 && !activeLesson) {
                 setActiveLesson(res.lessons[0]);
             }
-            if (activeLesson) {
+            // Update active lesson if already set
+            if (activeLesson && res.lessons) {
                 const refreshedLesson = res.lessons.find(l => l.id === activeLesson.id);
                 if (refreshedLesson) setActiveLesson(refreshedLesson);
             }
-            setNewLesson(prev => ({ ...prev, order: res.lessons.length + 1 }));
+            setNewLesson(prev => ({ ...prev, order: res.lessons ? res.lessons.length + 1 : 1 }));
             return res;
         } catch (e) {
             console.error(e);
@@ -304,7 +306,7 @@ const CourseView = () => {
                         <div className="card" style={{ minHeight: '50vh', display: 'flex', flexDirection: 'column' }}>
                             <h1 style={{ marginTop: 0, fontSize: '2rem' }}>{activeLesson.title}</h1>
                             <div style={{ flex: 1, padding: '1.5rem 0', fontSize: '1.1rem', lineHeight: '1.6' }}>
-                                {activeLesson.content.startsWith('http') ? (
+                                {activeLesson.content && activeLesson.content.startsWith('http') ? (
                                     <iframe width="100%" height="400" src={getEmbedUrl(activeLesson.content)} frameBorder="0" allowFullScreen style={{ borderRadius: 'var(--radius)' }}></iframe>
                                 ) : (
                                     <p style={{ whiteSpace: 'pre-wrap' }}>{activeLesson.content}</p>

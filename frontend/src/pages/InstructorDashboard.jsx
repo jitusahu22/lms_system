@@ -111,13 +111,13 @@ const InstructorDashboard = () => {
                 {courses.map(course => (
                     <div key={course.id} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
                         <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.25rem' }}>{course.title}</h3>
-                        <p style={{ color: 'var(--text-muted)', flex: 1, marginBottom: '1.5rem' }}>{course.description.substring(0, 100)}...</p>
+                        <p style={{ color: 'var(--text-muted)', flex: 1, marginBottom: '1.5rem' }}>{course.description ? course.description.substring(0, 100) : ''}...</p>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)' }}><Users size={16} /> {course.enrollment_count}</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#fbbf24', fontWeight: 'bold' }}>
                                 <Star size={16} fill="#fbbf24" /> {course.average_rating > 0 ? course.average_rating : 'New'}
                             </span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)' }}><BookOpen size={16} /> {course.lessons.length}</span>
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)' }}><BookOpen size={16} /> {course.lessons?.length || 0}</span>
                             <Link to={`/courses/${course.id}`} className="btn" style={{ background: 'var(--background)' }}>Manage</Link>
                         </div>
                     </div>

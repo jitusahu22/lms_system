@@ -117,9 +117,60 @@ const Home = () => {
         const fetchCourses = async () => {
             try {
                 const data = await getCourses();
-                setCourses(Array.isArray(data) ? data.slice(0, 3) : []);
+                if (Array.isArray(data) && data.length > 0) {
+                    setCourses(data.slice(0, 3));
+                } else {
+                    // Fallback default courses if no data from backend
+                    setCourses([
+                        {
+                            id: 'default-1',
+                            title: 'Introduction to Artificial Intelligence',
+                            description: 'Learn the fundamentals of AI, machine learning algorithms, and neural networks in this comprehensive beginner course.',
+                            instructor_name: 'Dr. Alan Turing',
+                            average_rating: '4.9',
+                        },
+                        {
+                            id: 'default-2',
+                            title: 'Advanced React Patterns',
+                            description: 'Master state management, custom hooks, and performance optimization techniques for modern React applications.',
+                            instructor_name: 'Sarah Connor',
+                            average_rating: '4.8',
+                        },
+                        {
+                            id: 'default-3',
+                            title: 'Full-Stack Web Development',
+                            description: 'Build complete applications from scratch using Django, React, and PostgreSQL with modern deployment practices.',
+                            instructor_name: 'John Smith',
+                            average_rating: '4.7',
+                        }
+                    ]);
+                }
             } catch (err) {
                 console.error("Failed to fetch courses for preview", err);
+                // Fallback default courses on error
+                setCourses([
+                    {
+                        id: 'default-1',
+                        title: 'Introduction to Artificial Intelligence',
+                        description: 'Learn the fundamentals of AI, machine learning algorithms, and neural networks in this comprehensive beginner course.',
+                        instructor_name: 'Dr. Alan Turing',
+                        average_rating: '4.9',
+                    },
+                    {
+                        id: 'default-2',
+                        title: 'Advanced React Patterns',
+                        description: 'Master state management, custom hooks, and performance optimization techniques for modern React applications.',
+                        instructor_name: 'Sarah Connor',
+                        average_rating: '4.8',
+                    },
+                    {
+                        id: 'default-3',
+                        title: 'Full-Stack Web Development',
+                        description: 'Build complete applications from scratch using Django, React, and PostgreSQL with modern deployment practices.',
+                        instructor_name: 'John Smith',
+                        average_rating: '4.7',
+                    }
+                ]);
             } finally {
                 setLoading(false);
             }
@@ -321,7 +372,7 @@ const Home = () => {
                                         </span>
                                     </div>
                                 </div>
-                                <Link to={`/courses/${course.id}`} className="course-card-btn">
+                                <Link to={course.id.toString().startsWith('default') ? '/register' : `/courses/${course.id}`} className="course-card-btn">
                                     <span>View Course</span>
                                     <ArrowRight size={16} />
                                 </Link>

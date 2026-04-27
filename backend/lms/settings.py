@@ -84,24 +84,22 @@ WSGI_APPLICATION = 'lms.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME', 'lms_db'),
-#         'USER': os.getenv('DB_USER', 'postgres'),
-#         'PASSWORD': os.getenv('DB_PASSWORD', ''),
-#         'HOST': os.getenv('DB_HOST', 'localhost'),
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#     }
-# }
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
+# Falls back to SQLite for local development when DATABASE_URL is not set
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv("DATABASE_URL"),
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -144,6 +142,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.User'
+
+# Default auto field type (Django 4.2+ requirement)
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # # CORS
 # CORS_ALLOW_ALL_ORIGINS = os.getenv('CORS_ALLOW_ALL_ORIGINS', 'False').lower() in ('true', '1', 't')

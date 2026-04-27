@@ -23,23 +23,37 @@ const AppRoutes = () => {
   return (
     <Router>
       <Navbar />
-      <div style={{ padding: '1.5rem 2%', maxWidth: '1600px', margin: '0 auto' }}>
-        <Routes>
-          <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-          <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              {user?.role === 'instructor' ? <InstructorDashboard /> : <StudentDashboard />}
-            </ProtectedRoute>
-          } />
-          <Route path="/courses/:courseId" element={
-            <ProtectedRoute>
-              <CourseView />
-            </ProtectedRoute>
-          } />
-        </Routes>
-      </div>
+      <Routes>
+        {/* Auth pages: full-viewport centered, no outer padding */}
+        <Route path="/login" element={
+          !user
+            ? <div style={{ height: 'calc(100vh - 64px)', overflow: 'hidden' }}><Login /></div>
+            : <Navigate to="/" />
+        } />
+        <Route path="/register" element={
+          !user
+            ? <div style={{ height: 'calc(100vh - 64px)', overflow: 'hidden' }}><Register /></div>
+            : <Navigate to="/" />
+        } />
+        {/* All other pages: standard padded layout */}
+        <Route path="/*" element={
+          <div style={{ padding: '1.5rem 2%', maxWidth: '1600px', margin: '0 auto' }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  {user?.role === 'instructor' ? <InstructorDashboard /> : <StudentDashboard />}
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/:courseId" element={
+                <ProtectedRoute>
+                  <CourseView />
+                </ProtectedRoute>
+              } />
+            </Routes>
+          </div>
+        } />
+      </Routes>
     </Router>
   );
 };

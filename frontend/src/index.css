@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import "tailwindcss";
 :root {
   --primary: #6366f1;
   /* Indigo */
@@ -37,6 +36,18 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* Hide scrollbars globally */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 a {
@@ -94,14 +105,7 @@ button {
   transform: translateY(-2px);
 }
 
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-}
+/* duplicate .btn-primary removed – gradient + glow defined above */
 
 .input {
   width: 100%;
